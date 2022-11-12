@@ -2,9 +2,18 @@ import React from 'react';
 import facade from "../apiFacade.js";
 
 function PetTable({dataFromServer, petType, addPet}) {
+    //TODO: Se om du kan bruge username til det samme som "addPet", bare hvor der testes om det er null eller ej
     const addClick = (e) => {
-        facade.fetchData("dog/addDogToUser/" + username, data =>
-            setDataFromServer(data), "");
+        console.log(e.target.value)
+        const dogId = e.target.value;
+        const jsonElement = dataFromServer.filter((dog) => {
+            // console.log(dog);
+            return dog.id == dogId
+        })[0];
+        console.log(jsonElement);
+        // facade.postData("dog/addDogToUser/" + username,
+        //     () => {}, "", jsonElement);
+        e.target.disabled = true;
     }
 
     const username= facade.getUserName();
@@ -33,7 +42,7 @@ function PetTable({dataFromServer, petType, addPet}) {
                                 <td>{pet.weight.imperial}</td>
                                 <td>{pet.weight.metric}</td>
                                 {addPet ? <td>
-                                    <button className={"btn btn-outline-light"}>Add</button>
+                                    <button value={pet.id} className={"btn btn-outline-light"} onClick={addClick}>Add</button>
                                 </td> : ""}
                             </tr>
                         ))}
