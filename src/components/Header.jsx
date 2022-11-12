@@ -23,6 +23,8 @@ function ColorSchemesExample({loggedIn}) {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/joke">Jokes</Nav.Link>
+            <Nav.Link as={Link} to="/dog">Dog Search</Nav.Link>
+            {/*<Nav.Link as={Link} to="/joke">Cat Search</Nav.Link>*/}
             <Nav.Link as={Link} to="/login">{loggedIn ? "Profile" : "Login"}</Nav.Link>
           </Nav>
         </Container>

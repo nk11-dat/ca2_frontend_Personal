@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from "react";
 import facade from "../apiFacade.js";
+import DogTable from "./DogTable.jsx";
 
 function UserPage({username}) {
-    const [dataFromServer, setDataFromServer] = useState({})
+    const [dogDataFromServer, setDogDataFromServer] = useState({})
     let rows;
 
     useEffect(() => {
         facade.fetchData("dog/" + username, data =>
-            setDataFromServer(data), "");
+            setDogDataFromServer(data), "");
 
-        if (dataFromServer.length > 0)
-            rows = dataFromServer.map(dog => {
+        if (dogDataFromServer.length > 0)
+            rows = dogDataFromServer.map(dog => {
                 `<tr>
                     <td>${dog.id}</td>
                     <td>${dog.name}</td>
@@ -23,32 +24,9 @@ function UserPage({username}) {
 
     return (
         <div>
-            <h2>Data Received from server</h2>
-            <h3>{dataFromServer.length > 0 ? (
-                    <table className="table table-dark">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Life span</th>
-                            <th>Pounds</th>
-                            <th>Kgs</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {dataFromServer.map(dog => (
-                            <tr>
-                                <td>{dog.id}</td>
-                                <td>{dog.name}</td>
-                                <td>{dog.life_span}</td>
-                                <td>{dog.weight.imperial}</td>
-                                <td>{dog.weight.metric}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>)
-                :
-                "Loading..."}</h3>
+            <DogTable dataFromServer={dogDataFromServer}/>
+            <h2>Your favorite cats</h2>
+            {"cats go here..."}
         </div>
     )
 

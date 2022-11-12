@@ -20,7 +20,6 @@ function LogIn({loggedIn, setLoggedIn, setErrorMessage}) {
 
     return (
         <div>
-            <Outlet/>
             {!loggedIn ? (<LoginForm login={login} loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>) :
                 (<div>
                     <UserPage username={facade.getUserName()}/>
