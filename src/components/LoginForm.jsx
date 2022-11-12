@@ -24,8 +24,6 @@ function LoginForm({login, loginCredentials, setLoginCredentials}) {
                 <input placeholder="Password" id="password" />
                 <button onClick={performLogin}>Login</button>
             </form>
-
-            <Outlet />
         </div>
     )
 

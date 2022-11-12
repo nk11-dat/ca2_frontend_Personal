@@ -68,6 +68,18 @@ function apiFacade() {
         return fetch(URL + "/api/joke/haha", options).then(handleHttpErrors);
     }
 
+    const getUserName = () =>
+    {
+        const token = getToken()
+        if (token != null)
+        {
+            const payloadBase64 = getToken().split('.')[1]
+            const decodedClaims = JSON.parse(window.atob(payloadBase64))
+            const username = decodedClaims.username
+            return username
+        } else return ""
+    }
+
     const getUserRoles = () =>
     {
         const token = getToken()
@@ -112,7 +124,8 @@ function apiFacade() {
         logout,
         fetchData,
         hasUserAccess,
-        getUserRoles
+        getUserRoles,
+        getUserName
     }
 }
 const facade = apiFacade();

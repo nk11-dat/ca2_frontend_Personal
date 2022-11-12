@@ -3,6 +3,7 @@ import facade from "../apiFacade.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserPage from "./UserPage.jsx";
 import LoginForm from "./LoginForm.jsx";
+import {Outlet} from "react-router-dom";
 
 function LogIn({loggedIn, setLoggedIn, setErrorMessage}) {
     // const [loggedIn, setLoggedIn] = useState(false)
@@ -19,9 +20,10 @@ function LogIn({loggedIn, setLoggedIn, setErrorMessage}) {
 
     return (
         <div>
+            <Outlet/>
             {!loggedIn ? (<LoginForm login={login} loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>) :
                 (<div>
-                    <UserPage />
+                    <UserPage username={facade.getUserName()}/>
                     <button onClick={logout}>Logout</button>
                 </div>)}
         </div>
