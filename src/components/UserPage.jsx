@@ -1,32 +1,20 @@
 import React, {useEffect, useState} from "react";
 import facade from "../apiFacade.js";
-import DogTable from "./DogTable.jsx";
+import PetTable from "./PetTable.jsx";
 
 function UserPage({username}) {
     const [dogDataFromServer, setDogDataFromServer] = useState({})
-    let rows;
+    const [catDataFromServer, setCatDataFromServer] = useState({})
 
     useEffect(() => {
-        facade.fetchData("dog/" + username, data =>
-            setDogDataFromServer(data), "");
-
-        if (dogDataFromServer.length > 0)
-            rows = dogDataFromServer.map(dog => {
-                `<tr>
-                    <td>${dog.id}</td>
-                    <td>${dog.name}</td>
-                    <td>${dog.life_span}</td>
-                    <td>${dog.weight.imperial}</td>
-                    <td>${dog.weight.metric}</td>
-                </tr>`
-            }).join("");//setDataFromServer(data), "");
+        facade.fetchData("dog/" + username, data => setDogDataFromServer(data), "")
+        // facade.fetchData("cat/" + username, data => setCatDataFromServer(data), "")
     }, [])
 
     return (
         <div>
-            <DogTable dataFromServer={dogDataFromServer}/>
-            <h2>Your favorite cats</h2>
-            {"cats go here..."}
+            <PetTable dataFromServer={dogDataFromServer} petType={"dog"}/>
+            <PetTable dataFromServer={catDataFromServer} petType={"cat"}/>
         </div>
     )
 
