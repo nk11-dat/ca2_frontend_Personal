@@ -18,7 +18,7 @@ function PetTable({dataFromServer, petType, username}) {
 
     return (
         <>
-            <h2>{petType}'s</h2>
+            <h2 className={"text-center"}>{petType}'s</h2>
             {dataFromServer.length > 0 ? (
                     <table className="table table-dark">
                         <thead>
@@ -47,7 +47,7 @@ function PetTable({dataFromServer, petType, username}) {
                         </tbody>
                     </table>)
                 :
-                "Loading..."}
+                (<p className={"text-center"}>Loading...</p>)}
         </>
     );
 }
