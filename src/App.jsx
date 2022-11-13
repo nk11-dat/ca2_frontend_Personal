@@ -40,8 +40,8 @@ function App() {
                 <Route path="login" element={<LogIn loggedIn={loggedIn} setLoggedIn={setLoggedIn} setErrorMessage={setErrorMessage}/>}/>
                 <Route path="joke" element={facade.hasUserAccess('user', loggedIn) ? <GetJoke setErrorMessage={setErrorMessage} /> : <h4>Get back to work you lazy dog!</h4>}/>
                 <Route path="search" element={facade.hasUserAccess('user', loggedIn) ? <Search changeHandler={changeHandler} searchInput={searchInput} searchClick={searchClick} dataFromServer={dataFromServer} petType={"dog"}/> : <DeniedAccess/>}>
-                    <Route path="dog" element={<PetTable dataFromServer={dataFromServer} petType={"dog"} addPet={true}/>}/>
-                    <Route path="cat" element={<PetTable dataFromServer={dataFromServer} petType={"cat"}/>}/>
+                    <Route path="dog" element={<PetTable dataFromServer={dataFromServer} petType={"dog"} username={facade.getUserName()}/>}/>
+                    <Route path="cat" element={<PetTable dataFromServer={dataFromServer} petType={"cat"} username={facade.getUserName()}/>}/>
                     {/*<Route path="cat" element={<Search changeHandler={changeHandler} searchInput={searchInput} searchClick={searchClick} petType={"cat"}/>}/>*/}
                 </Route>
                 {/*<Route path="dog" element={<Search changeHandler={changeHandler} searchInput={searchInput} searchClick={searchClick} petType={"dog"}/>}/>*/}

@@ -1,7 +1,7 @@
 import React from 'react';
 import facade from "../apiFacade.js";
 
-function PetTable({dataFromServer, petType, addPet}) {
+function PetTable({dataFromServer, petType, username}) {
     //TODO: Se om du kan bruge username til det samme som "addPet", bare hvor der testes om det er null eller ej
     const addClick = (e) => {
         console.log(e.target.value)
@@ -11,12 +11,10 @@ function PetTable({dataFromServer, petType, addPet}) {
             return dog.id == dogId
         })[0];
         console.log(jsonElement);
-        // facade.postData("dog/addDogToUser/" + username,
-        //     () => {}, "", jsonElement);
+        facade.postData("dog/addDogToUser/" + username,
+            () => {}, "", jsonElement);
         e.target.disabled = true;
     }
-
-    const username= facade.getUserName();
 
     return (
         <>
@@ -30,7 +28,7 @@ function PetTable({dataFromServer, petType, addPet}) {
                             <th>{petType === "dog" ? "Life span" : "Indoor"}</th>
                             <th>Pounds</th>
                             <th>Kgs</th>
-                            {addPet ? <th></th> : ""}
+                            {username ? <th></th> : ""}
                         </tr>
                         </thead>
                         <tbody>
@@ -41,7 +39,7 @@ function PetTable({dataFromServer, petType, addPet}) {
                                 <td>{petType === "dog" ? pet.life_span : (pet.indoor === 0 ? "No" : "Yes")}</td>
                                 <td>{pet.weight.imperial}</td>
                                 <td>{pet.weight.metric}</td>
-                                {addPet ? <td>
+                                {username ? <td>
                                     <button value={pet.id} className={"btn btn-outline-light"} onClick={addClick}>Add</button>
                                 </td> : ""}
                             </tr>
